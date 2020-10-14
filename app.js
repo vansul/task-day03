@@ -5,6 +5,8 @@ const fs = require('fs');
 
 const app = express();
 
+const port = process.env.PORT || 5000;
+
 // Encoding the request body using body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -73,4 +75,4 @@ app.get('*', (_req, res) => {
   res.sendStatus(404);
 });
 
-app.listen(5000);
+app.listen(port);
