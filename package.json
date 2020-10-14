@@ -4,7 +4,7 @@
   "description": "The todo task done which was given by the resource person of the MERN Stack Course.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ."
+    "start": "node ."
   },
   "author": "Vaibhav Kaushik",
   "license": "MIT",
