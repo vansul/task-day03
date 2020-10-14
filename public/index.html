@@ -71,7 +71,7 @@
     <!-- Writing JavaScript to get the Products list -->
     <script>
       $(document).ready(() => {
-        $.getJSON('http://localhost:5000/products', (data) => {
+        $.getJSON('https://task-day03.herokuapp.com/products', (data) => {
           if (data.length) {
             // Initializing the products array
             let products = [];
