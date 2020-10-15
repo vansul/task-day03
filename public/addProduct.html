@@ -106,40 +106,79 @@
           </div>
         </div>
       </form>
+    </div>
 
-      <div
-        class="alert alert-success alert-dismissible fade"
-        id="success-alert"
-        role="alert"
-      >
-        <strong>Success!</strong> The product is successfully added to the
-        <code>products.json</code> file, go to <a href="/">home</a> to see
-        effects.
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <!-- successModal -->
+    <div
+      class="modal fade"
+      id="successModal"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="successModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-success">
+            <h5 class="modal-title" id="successModalLabel">Success!</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            The product is successfully added to the
+            <code>products.json</code> file. Go to home page to see the changes.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <a href="/" class="btn btn-primary" role="button">Go to Home</a>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div
-        class="alert alert-danger alert-dismissible fade"
-        id="error-alert"
-        role="alert"
-      >
-        <strong>Error!</strong>
-        <p id="error-msg"></p>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <!-- errorModal -->
+    <div
+      class="modal fade"
+      id="errorModal"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="errorModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-danger">
+            <h5 class="modal-title" id="errorModalLabel">Error!</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="errorModalText"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal">
+              Okay!
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -159,9 +198,6 @@
 
     <!-- Writing JavaScript to create POST request -->
     <script>
-      const successAlert = $('#success-alert');
-      const errorAlert = $('#error-alert');
-
       $('form').submit(function (e) {
         e.preventDefault();
 
@@ -176,17 +212,9 @@
         );
 
         if (!valid) {
-          $('#error-msg').text('All fields are required to be filled.');
-          errorAlert.removeClass('hide');
-          errorAlert.addClass('show');
-          errorAlert.slideDown(1000, 'swing');
-          setTimeout(() => {
-            errorAlert.slideUp(1000, 'swing');
-            setTimeout(() => {
-              errorAlert.removeClass('show');
-              errorAlert.addClass('hide');
-            }, 4000);
-          }, 4000);
+          $('#errorModalText').text('All the fields are mandatory.');
+
+          $('#errorModal').modal('show');
 
           return;
         }
@@ -204,43 +232,13 @@
           url: 'https://task-day03.herokuapp.com/addProduct',
           data,
           error(_a, _b, error) {
-            $('#error-msg').text(error);
-            errorAlert.removeClass('hide');
-            errorAlert.addClass('show');
-            errorAlert.slideDown(1000, 'swing');
-            setTimeout(() => {
-              errorAlert.slideUp(1000, 'swing');
-              setTimeout(() => {
-                errorAlert.removeClass('show');
-                errorAlert.addClass('hide');
-              }, 4000);
-            }, 4000);
+            $('#errorModalText').text(error);
+
+            $('#errorModal').modal('show');
           },
         }).done((data) => {
-          successAlert.addClass('show');
-          successAlert.slideDown(1000, 'swing');
-          setTimeout(() => {
-            successAlert.slideUp(1000, 'swing');
-            setTimeout(() => {
-              successAlert.removeClass('show');
-              successAlert.addClass('hide');
-            }, 4000);
-          }, 4000);
+          $('#successModal').modal('show');
         });
-      });
-
-      successAlert.on('close.bs.alert', function () {
-        successAlert.fadeTo(500, 500).slideUp(500, function () {
-          successAlert.slideUp(500, 'swing');
-        });
-        return false;
-      });
-
-      errorAlert.on('close.bs.alert', function () {
-        errorAlert.fadeTo(500, 500).slideUp(500, function () {
-          errorAlert.slideUp(500, 'swing');
-        });
-        return false;
       });
     </script>
   </body>
