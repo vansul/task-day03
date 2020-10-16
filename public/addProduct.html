@@ -229,7 +229,7 @@
 
         $.ajax({
           type: 'POST',
-          url: 'https://task-day03.herokuapp.com/addProduct',
+          url: 'http://localhost:5000/addProduct',
           data,
           error(_a, _b, error) {
             $('#errorModalText').text(error);
