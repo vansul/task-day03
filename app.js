@@ -65,7 +65,7 @@ app.get('/day03/products', (_req, res) => {
 });
 
 // Showing Home Page
-app.get('/', (_req, res) => {
+app.get('/day03', (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
