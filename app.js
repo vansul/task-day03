@@ -16,12 +16,19 @@ app.get('/addProduct', (_req, res) => {
 });
 
 // Process the post request
+
 app.post('/addProduct', (req, res) => {
+  const formatter = new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    minimumFractionDigits: 2,
+  });
+
   // Initialize the product object
   const product = {
     name: req.body.name,
     brand: req.body.brand,
-    price: req.body.price,
+    price: formatter.format(req.body.price),
     desc: req.body.desc,
   };
 
