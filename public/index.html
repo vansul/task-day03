@@ -73,7 +73,7 @@
     <!-- Writing JavaScript to get the Products list -->
     <script>
       $(document).ready(() => {
-        $.getJSON('https://task-day03.herokuapp.com/products', (data) => {
+        $.getJSON('https://task-day03.herokuapp.com/day03/products', (data) => {
           if (data.length) {
             // Initializing the products array
             let products = [];
@@ -95,7 +95,7 @@
             $('#products').html(products);
           } else {
             $('#products').html(`
-              <span class="list-group-item list-group-item-light bg-danger text-white-50"> <center>The products list is empty, go to <a href="/addProduct" class="text-white"> <code>Add Product</code></a> to add some.</center> </span>
+              <span class="list-group-item list-group-item-light bg-danger text-white-50"> <center>The products list is empty, go to <a href="/day03/addProduct" class="text-white"> <code>Add Product</code></a> to add some.</center> </span>
             `);
           }
         });

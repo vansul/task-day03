@@ -11,12 +11,12 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Add Product page
-app.get('/addProduct', (_req, res) => {
+app.get('/day03/addProduct', (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'addProduct.html'));
 });
 
 // Process the post request
-app.post('/addProduct', (req, res) => {
+app.post('/day03/addProduct', (req, res) => {
   // Initialize the product object
   const product = {
     name: req.body.name,
@@ -54,7 +54,7 @@ app.post('/addProduct', (req, res) => {
 });
 
 // Sending JSON of products
-app.get('/products', (_req, res) => {
+app.get('/day03/products', (_req, res) => {
   fs.readFile('products.json', 'utf8', (err, data) => {
     // If got error then just throw it
     if (err) throw err;
