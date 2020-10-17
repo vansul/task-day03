@@ -45,6 +45,9 @@ app.post('/day03/addProduct', (req, res) => {
       // If got error then just throw it
       if (err) throw err;
 
+      res.header('Access-Control-Allow-Headers', 'x-requested-with');
+      res.header('Access-Control-Allow-Origin', '*');
+
       res.status(201).json({
         success: true,
         product,
@@ -58,6 +61,9 @@ app.get('/day03/products', (_req, res) => {
   fs.readFile('products.json', 'utf8', (err, data) => {
     // If got error then just throw it
     if (err) throw err;
+
+    res.header('Access-Control-Allow-Headers', 'x-requested-with');
+    res.header('Access-Control-Allow-Origin', '*');
 
     // Return the products
     res.json(JSON.parse(data));
